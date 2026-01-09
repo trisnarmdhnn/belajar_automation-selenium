@@ -1,13 +1,12 @@
 from behave import given, when, then
 from pages.login_page import LoginPage
 from pages.dashboard_page import DashboardPage
-
-URL = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
+from config.config import LOGIN_URL
 
 @given("user membuka halaman login")
 def step_open_login(context):
     context.login = LoginPage(context.driver)
-    context.login.open(URL)
+    context.login.open(LOGIN_URL)
 
 @when('user login dengan username "{username}" dan password "{password}"')
 def step_login_full(context, username, password):
