@@ -1,13 +1,12 @@
 from behave import given, when, then
 from pages.login_page import LoginPage
 from pages.dashboard_page import DashboardPage
-
-URL = "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login"
+from config.config import LOGIN_URL
 
 @given("user membuka halaman login")
 def step_open_login(context):
     context.login = LoginPage(context.driver)
-    context.login.open(URL)
+    context.login.open(LOGIN_URL)
 
 @when('user login dengan username "{username}" dan password "{password}"')
 def step_login_full(context, username, password):
@@ -21,10 +20,11 @@ def step_login_no_username(context, password):
 def step_login_no_password(context, username):
     context.login.login(username=username)
 
-@then("user berhasil masuk ke dashboard")
-def step_verify_dashboard(context):
+@then('user berhasil masuk ke "{message}"')
+def step_verify_dashboard(context, message):
     dashboard = DashboardPage(context.driver)
     assert dashboard.is_dashboard_displayed()
+    assert dashboard.get_dashboard_title() == message
 
 @then('muncul pesan error "{message}"')
 def step_verify_error(context, message):
