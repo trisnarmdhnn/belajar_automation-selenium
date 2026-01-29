@@ -3,7 +3,7 @@ Feature: Login OrangeHRM
   Scenario: Login sukses
     Given user membuka halaman login
     When user login dengan username "Admin" dan password "admin123"
-    Then user berhasil masuk ke dashboard
+    Then user berhasil masuk ke "Dashboard"
 
   Scenario: Login gagal - password salah
     Given user membuka halaman login
