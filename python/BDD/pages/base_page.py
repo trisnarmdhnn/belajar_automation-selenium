@@ -8,9 +8,13 @@ class BasePage:
 
     def wait_visible(self, locator):
         return self.wait.until(EC.visibility_of_element_located(locator))
+    
+    def wait_clickable(self, locator):
+        return self.wait.until(EC.element_to_be_clickable(locator))
 
     def click(self, locator):
-        self.wait_visible(locator).click()
+        self.wait_visible(locator)
+        self.wait_clickable(locator).click()
 
     def input_text(self, locator, text):
         element = self.wait_visible(locator)
